@@ -35,7 +35,6 @@ async function GetList() {
 }
 
 async function WriteList() {
-
   try {
     await http.post("/api", theList);
   } catch (error) {
@@ -62,9 +61,15 @@ async function httpPost(e) {
 async function httpDelete(e) {
   e.preventDefault();
   if (theList.length > 0) {
-    theList = [];
+    let data = input.value.trim();
+    
+    let i = theList.indexOf(input.value.trim());
+    if(i != -1){
+    console.log(i);
+    theList.splice(i,1);
     await WriteList();
     ShowList();
+    }
   } else {
     console.warn("The list is already empty");
   }

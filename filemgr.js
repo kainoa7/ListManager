@@ -22,6 +22,15 @@ async function WriteData(dataOut) {
     console.error("Error writing file:", error);
   }
 }
-
+async function DeleteData(datain) {
+  try {
+    // Write the file with JSON stringified data
+    await fs.rm("./listdata.json", datain);
+  } catch (error) {
+    // Log any errors during the writing process
+    console.error("Error writing file:", error);
+  }
+}
 exports.ReadData = ReadData;
 exports.WriteData = WriteData;
+exports.DeleteData = DeleteData;

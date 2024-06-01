@@ -30,7 +30,14 @@ app.post("/api", async (req,res) => {
     console.error("EORRORROOR", error);
   }
 })
-
+app.delete("/api", async (req,res) =>{
+  try{
+    const data = await fm.DeleteData(req.body);
+    res.send(data);
+  }catch(error){
+    console.error("ERROROROR", error);
+  }
+})
 // page not found route
 app.all("*", (req,res) => {
   res.status(404).send("<h1>Page Not Found...</h1>");
