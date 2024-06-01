@@ -12,11 +12,23 @@ app.use(express.json());
 
 // Define HTTP routes listenting for requests
 app.get("/api", async (req,res) => {
-  res.send(await fm.ReadData());
+  try{
+    const data = await fm.ReadData();
+    res.send(data);
+  } catch (error){
+    console.error("BOMBASTIC ERROR", error)
+    
+  }
 })
 
 app.post("/api", async (req,res) => {
-  res.post(await fm.WriteData());
+  try{
+    const data = await fm.WriteData(req.body);
+    res.send(data);
+
+  } catch(error){
+    console.error("EORRORROOR", error);
+  }
 })
 
 // page not found route
@@ -26,7 +38,7 @@ app.all("*", (req,res) => {
 
 // Create a server
 const appName = "Simple List";
-const port = 5000;
+const port = 6500;
 app.listen(port, () => {
   console.log(`App ${appName} is running on port ${port}`);
 })
