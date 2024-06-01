@@ -3,7 +3,7 @@ const fs = require("fs/promises");
 async function ReadData() {
   try {
     // Make sure the file exists
-    const data = await fs.readFile("listdata.json", "utf8");
+    const data = await fs.readFile("./listdata.json", "utf-8");
     // Convert the buffer to a JSON object and return it
     return JSON.parse(data);
   } catch (error) {
@@ -16,7 +16,7 @@ async function ReadData() {
 async function WriteData(dataOut) {
   try {
     // Write the file with JSON stringified data
-    await fs.writeFile("listdata.json", JSON.stringify(dataOut, null, 2));
+    await fs.writeFile("./listdata.json", JSON.stringify(dataOut, null, 2));
   } catch (error) {
     // Log any errors during the writing process
     console.error("Error writing file:", error);
