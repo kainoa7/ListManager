@@ -25,14 +25,36 @@ function ShowList() {
 
 async function GetList() {
 
+  try {
+    theList = await http.get("/api");
+    ShowList();
+  } catch (error) {
+    console.error("Error getting list:", error);
+  }
+
 }
 
 async function WriteList() {
+
+  try {
+    await http.post("/api", theList);
+  } catch (error) {
+    console.error("Error writing list:", error);
+  }
 
 }
 
 /* Listener Functions */
 async function httpPost(e) {
+
+  e.preventDefault();
+  const newItem = input.value.trim();
+  if (newItem) {
+    theList.push(newItem);
+    input.value = "";
+    await WriteList();
+    ShowList();
+  }
 
   
 }
