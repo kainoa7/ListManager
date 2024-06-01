@@ -59,9 +59,15 @@ async function httpPost(e) {
   
 }
 
-function httpDelete(e) {
-
-  
+async function httpDelete(e) {
+  e.preventDefault();
+  if (theList.length > 0) {
+    theList = [];
+    await WriteList();
+    ShowList();
+  } else {
+    console.warn("The list is already empty");
+  }
 }
 
 // Loading functions
